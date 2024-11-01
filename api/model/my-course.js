@@ -8,11 +8,10 @@ const schema = new Schema({
     required: true,
   },
 
-  courses: [
-    {
-      type: [String],
-    },
-  ],
+  courses: {
+    type: Schema.Types.Array,
+    default: []
+  }
 });
 
 const MyCourse = mongoose.model("MyCourse", schema, "myCourse");

@@ -38,6 +38,10 @@ const MESSAGE = {
     code: 400,
     message: "Email đã tồn tại",
   },
+  EXIST_USERNAME: {
+    code: 409,
+    message: "Username đã tồn tại",
+  },
   // SIGN_IN
   NOT_EXIST_EMAIL: {
     code: 400,

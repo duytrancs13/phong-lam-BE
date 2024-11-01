@@ -30,8 +30,26 @@ exports.signUp = async (request, response, next) => {
       });
     }
 
-    const user = await User.findOne({ email: request.body.email });
+    const user = await User.findOne({
+      $or: [
+        {
+          email: request.body.email,
+        },
+        {
+          username: request.body.username,
+        },
+      ],
+    });
+
     if (user) {
+      if (user.username === request.body.username) {
+        return response.status(STATUS.SUCCESS).json({
+          error_code: MESSAGE.EXIST_USERNAME.code,
+          message: MESSAGE.EXIST_USERNAME.message,
+          data: "",
+        });
+      }
+
       return response.status(STATUS.SUCCESS).json({
         error_code: MESSAGE.EXIST_EMAIL.code,
         message: MESSAGE.EXIST_EMAIL.message,
